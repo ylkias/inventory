@@ -829,6 +829,9 @@ Assinatura Digital: ${item.responsibilityTerm.signedBy}`,
     </div>
   )
 
+
+  
+
   const renderInventory = () => {
     const filteredItems = mockInventoryItems.filter((item) => {
       const matchesStatus = inventoryFilter.status === "all" || item.status === inventoryFilter.status

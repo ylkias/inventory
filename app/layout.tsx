@@ -5,9 +5,9 @@ import { GeistMono } from "geist/font/mono"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Sistema de Inventário ITIL",
+  title: "Sistema Gestao Termos",
   description: "Sistema completo de gestão de inventário seguindo boas práticas ITIL",
-  generator: "v0.app",
+ 
 }
 
 export default function RootLayout({
