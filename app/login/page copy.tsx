@@ -3,36 +3,30 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUser, FaLock, FaExclamationTriangle } from 'react-icons/fa';
+import axios from 'axios';
 
-export default function Page() {
+export default function LoginPage() {
+  const router = useRouter();
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErro('');
     setLoading(true);
+    setErro('');
 
     try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario, senha }),
-      });
+      const response = await axios.post('/api/login', { usuario, senha });
 
-      const data = await res.json();
-
-      if (res.ok && data.success) {
+      if (response.data.success) {
         router.push('/dashboard');
       } else {
-        setErro(data.message || 'Falha no login.');
+        setErro('Usuário ou senha inválidos');
       }
     } catch (err) {
-      console.error('Erro de login:', err);
-      setErro('Erro interno do servidor.');
+      setErro('Erro ao conectar com o servidor.');
     } finally {
       setLoading(false);
     }
