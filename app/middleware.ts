@@ -1,22 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const auth = request.cookies.get('auth')?.value
+  const authCookie = request.cookies.get('auth')?.value
 
-  const url = request.nextUrl.pathname
-  const isPublic = url.startsWith('/login')
+  const estaLogado = authCookie === 'logado'
+  const estaNaLogin = request.nextUrl.pathname === '/login'
 
-  if (!auth && !isPublic) {
+  // Se não estiver logado e não estiver acessando /login, redireciona para login
+  if (!estaLogado && !estaNaLogin) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  if (auth && isPublic) {
+  // Se estiver logado e tentar acessar /login, redireciona para dashboard
+  if (estaLogado && estaNaLogin) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   return NextResponse.next()
-}
-
-export const config = {
-  matcher: ['/', '/dashboard', '/login'],
 }
