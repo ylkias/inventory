@@ -1,33 +1,30 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { FaUser, FaLock, FaExclamationTriangle } from "react-icons/fa";
-import { autenticar } from "@/lib/auth";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { FaUser, FaLock, FaExclamationTriangle } from 'react-icons/fa';
 
-export default function LoginPage() {
-  const router = useRouter();
-  const [usuario, setUsuario] = useState("");
-  const [senha, setSenha] = useState("");
-  const [erro, setErro] = useState("");
+export default function Page() {
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErro("");
     setLoading(true);
+    setErro('');
 
-    if (!usuario || !senha) {
-      setErro("Preencha todos os campos.");
-      setLoading(false);
-      return;
-    }
-
-    const res = await autenticar(usuario, senha);
-    if (res.sucesso) {
-      router.push("/dashboard");
-    } else {
-      setErro(res.erro || "Erro ao autenticar.");
+    try {
+      if (usuario === 'admin' && senha === '123') {
+        router.push('/dashboard'); // redireciona para o MainPage
+      } else {
+        setErro('Credenciais inválidas. Tente novamente.');
+      }
+    } catch (err) {
+      setErro('Erro ao tentar fazer login.');
+    } finally {
       setLoading(false);
     }
   };
@@ -41,12 +38,8 @@ export default function LoginPage() {
               <FaUser className="text-2xl" />
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-            Acesso ao Sistema
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-300">
-            Insira suas credenciais para continuar
-          </p>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Acesso ao Sistema</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-300">Insira suas credenciais para continuar</p>
         </div>
 
         {erro && (
@@ -58,9 +51,7 @@ export default function LoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="text-sm text-gray-600 dark:text-gray-300">
-              Usuário
-            </label>
+            <label className="text-sm text-gray-600 dark:text-gray-300">Usuário</label>
             <div className="flex items-center border rounded px-3 py-2 mt-1 bg-gray-50 dark:bg-slate-700">
               <FaUser className="text-gray-400 mr-2" />
               <input
@@ -74,9 +65,7 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="text-sm text-gray-600 dark:text-gray-300">
-              Senha
-            </label>
+            <label className="text-sm text-gray-600 dark:text-gray-300">Senha</label>
             <div className="flex items-center border rounded px-3 py-2 mt-1 bg-gray-50 dark:bg-slate-700">
               <FaLock className="text-gray-400 mr-2" />
               <input
@@ -100,7 +89,7 @@ export default function LoginPage() {
                 Carregando...
               </>
             ) : (
-              "Entrar"
+              'Entrar'
             )}
           </button>
         </form>

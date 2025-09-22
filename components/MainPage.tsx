@@ -1,7 +1,6 @@
-// app/dashboard/page.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
@@ -14,15 +13,17 @@ import Wiki from "@/components/Wiki";
 import SignatureModal from "@/components/SignatureModal";
 import TermModal from "@/components/TermModal";
 
-export default function DashboardPage() {
+export default function MainPage() {
   const [selectedModule, setSelectedModule] = useState("dashboard");
   const [showSignatureModal, setShowSignatureModal] = useState(false);
   const [showTermModal, setShowTermModal] = useState(false);
 
   return (
     <div className="flex h-screen bg-gray-50">
+      {/* Sidebar */}
       <Sidebar selected={selectedModule} setSelected={setSelectedModule} />
 
+      {/* Área Principal */}
       <div className="flex-1 flex flex-col">
         <Header selectedModule={selectedModule} setShowSignatureModal={setShowSignatureModal} />
 
@@ -30,15 +31,18 @@ export default function DashboardPage() {
           {selectedModule === "dashboard" && <Dashboard />}
           {selectedModule === "inventory" && <Inventory />}
           {selectedModule === "operations" && <Operations />}
+
           {selectedModule === "terms" && (
             <Terms onNovaAssinatura={() => setShowSignatureModal(true)} />
           )}
+
           {selectedModule === "intelligence" && <Intelligence />}
           {selectedModule === "settings" && <Settings />}
           {selectedModule === "wiki" && <Wiki />}
         </main>
       </div>
 
+      {/* Modais */}
       <SignatureModal open={showSignatureModal} onClose={() => setShowSignatureModal(false)} />
       <TermModal open={showTermModal} onClose={() => setShowTermModal(false)} />
     </div>
