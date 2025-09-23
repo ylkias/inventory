@@ -1431,6 +1431,8 @@ Assinatura Digital: ${item.responsibilityTerm.signedBy}`,
     )
   }
 
+
+
   const renderOperations = () => (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -1612,6 +1614,8 @@ Assinatura Digital: ${item.responsibilityTerm.signedBy}`,
           )}
         </div>
       )}
+
+
 
       {operationsTab === "terms" && (
         <div className="space-y-6">
@@ -1866,6 +1870,9 @@ Assinatura Digital: ${item.responsibilityTerm.signedBy}`,
     </div>
   )
 
+
+
+
   const renderIntelligence = () => (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -2036,6 +2043,8 @@ Assinatura Digital: ${item.responsibilityTerm.signedBy}`,
     </div>
   )
 
+
+  
   const renderSettings = () => (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -2258,6 +2267,9 @@ Assinatura Digital: ${item.responsibilityTerm.signedBy}`,
       </div>
     </div>
   )
+
+
+
 
   const renderWiki = () => (
     <div className="flex h-full">
