@@ -32,16 +32,3 @@ model Asset {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
-
-
-model Configuracoes {
-  id               Int     @id @default(1)
-  ldapEnabled      Boolean
-  ldapServer       String
-  ldapPort         String
-  ldapBaseDN       String
-  apiEnabled       Boolean
-  apiKey           String
-  backupEnabled    Boolean
-  backupFrequency  String
-}

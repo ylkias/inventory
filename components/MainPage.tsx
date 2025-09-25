@@ -13,22 +13,10 @@ import Wiki from "@/components/Wiki";
 import SignatureModal from "@/components/SignatureModal";
 import TermModal from "@/components/TermModal";
 
-
-
 export default function MainPage() {
   const [selectedModule, setSelectedModule] = useState("dashboard");
   const [showSignatureModal, setShowSignatureModal] = useState(false);
   const [showTermModal, setShowTermModal] = useState(false);
-
-  import Settings from './Settings';
-
-  export default function Dashboard() {
-    return (
-      <div className="p-6">
-        <Settings />
-      </div>
-    );
-  }
 
   return (
     <div className="flex h-screen bg-gray-50">
